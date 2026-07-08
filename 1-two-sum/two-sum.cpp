@@ -2,20 +2,22 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         int n = nums.size();
-        vector<int> ans;
-        map<int, int> mpp;
+        int left = 0, right = n - 1;
+        vector<pair<int, int>> pairs;
         for(int i = 0; i < n; i++){
-            int a = nums[i];
-            int more = target - a;
-            if(mpp.find(more) != mpp.end()){
-                ans.push_back(i);
-                ans.push_back(mpp.at(more));
-                return ans;
-            }
-            mpp[a] = i;
+            pairs.push_back({nums[i], i});
         }
-        return ans;
+        sort(pairs.begin(), pairs.end());
+        while(left < right){
+            if(pairs[left].first + pairs[right].first == target){
+                return {pairs[left].second, pairs[right].second};
+            }
+            if(pairs[left].first + pairs[right].first < target){
+                left++;
+            }
+            if(pairs[left].first + pairs[right].first > target){
+                right--;
+                }
+            }return {};
     }
-    
-
 };
