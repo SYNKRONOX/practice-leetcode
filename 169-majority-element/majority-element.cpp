@@ -1,30 +1,37 @@
 class Solution {
-public:// MOORE's voting algorithm
+public:
     int majorityElement(vector<int>& nums) {
         int n = nums.size();
-        int cnt = 0;
-        int el;
-        for(int i = 0; i < n; i++){
+        int i = 0;
+        int  cnt = 0;
+        int num = 0;
+        while(i < n){
             if(cnt == 0){
-                cnt = 1;
-                el = nums[i];// we will have the required element after this for loop
-            }
-            else if(nums[i] == el){
+                num = nums[i];
                 cnt++;
             }
-            else{
-                cnt--;
+            else if(nums[i] == num){
+                cnt++; 
             }
-        }
-        int cnt1 = 0;
-        for(int i = 0; i < n; i++){
-            if(nums[i] == el){
-                cnt1++; // this counter is for what we actually for the finally standing soldier elemnt el
+            else if(nums[i] != num){
+                cnt--;  
+            }
+            i++;
+        
+    }
+    int cnt1 = 0;
+    for(int i = 0; i < n; i++){
+            if(nums[i] == num){
+                cnt1++;
             }
         }
         if(cnt1 > n/2){
-            return el;
+            return num;
+        }
+        else{
+            return -1;
         }
         return {};
     }
+    
 };
